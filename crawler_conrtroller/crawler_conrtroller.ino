@@ -6,26 +6,25 @@ const int REAR_LEFT_IN1 = 10;
 const int REAR_LEFT_IN2 = 11;
 const int REAR_LEFT_EN = 12;
 
-struct rear_right_motor {
-  int in1 = REAR_RIGHT_IN1;
-  int in2 = REAR_RIGHT_IN2;
-  int en = REAR_RIGHT_EN;
-  int pwm_value = 0;
-};
-struct rear_left_motor {
-  int in1 = REAR_LEFT_IN1;
-  int in2 = REAR_LEFT_IN2;
-  int en = REAR_LEFT_EN;
-  int pwm_value = 0;
-};
+typedef struct{
+  int in1;
+  int in2;
+  int en;
+}MOTOR;
+
+MOTOR rear_right;
+MOTOR rear_left;
 
 int input_from_fc [4];
-
+void motor_stop(MOTOR motor);
+void motor_freewheel(MOTOR motor);
+void motor_forwards(MOTOR motor, int);
+void motor_backwards(MOTOR motor, int);
 void setup() {
 }
 
 void loop() {
   readings();
-  motor_stop(&rear_right_motor);
-  motor_stop(&rear_left_motor);
+  motor_stop(rear_right);
+  motor_stop(rear_left);
 }
