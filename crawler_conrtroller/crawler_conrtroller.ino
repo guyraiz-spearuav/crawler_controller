@@ -11,12 +11,12 @@ int pwm_output (int);
 bool move_direction ( int);
 
 const int INPUT_PIN_FROM_FC [4] = {2, 3, 4, 5};
-const int REAR_RIGHT_IN1 = 7;
-const int REAR_RIGHT_IN2 = 8;
-const int REAR_RIGHT_EN = 9;
-const int REAR_LEFT_IN1 = 10;
-const int REAR_LEFT_IN2 = 11;
-const int REAR_LEFT_EN = 12;
+const int REAR_RIGHT_IN1 = 6;
+const int REAR_RIGHT_IN2 = 7;
+const int REAR_RIGHT_EN = 8;
+const int REAR_LEFT_IN1 = 9;
+const int REAR_LEFT_IN2 = 10;
+const int REAR_LEFT_EN = 11;
 
 const int rear_right = 0;
 const int rear_left = 1;
@@ -36,9 +36,13 @@ int pwm_output_value [4];
 bool motor_direction[4];
 
 void setup() {
+  Serial.begin(115200);
 }
 
 void loop() {
   readings();
   motors_run();
+  for (int i = 0; i <= 3; i++) {
+  }
+  Serial.println();
 }

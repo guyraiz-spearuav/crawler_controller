@@ -7,7 +7,11 @@ void motors_run() {
 }
 
 int pwm_output(int input) {
-  return abs(map(input, 1000, 2000, -255, 255));
+  if (input >= 1180) {
+    return constrain(abs(map(input, 1200, 1800, -255, 255)), 0, 255);
+  } else {
+    return 0;
+  }
 }
 bool move_direction(int input) {
   return (input >= 1500);
