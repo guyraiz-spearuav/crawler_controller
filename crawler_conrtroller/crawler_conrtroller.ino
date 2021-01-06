@@ -1,77 +1,31 @@
+const int INPUT_PIN_FROM_FC [4] = {2, 3, 4, 5};
+const int REAR_RIGHT_IN1 = 7;
+const int REAR_RIGHT_IN2 = 8;
+const int REAR_RIGHT_EN = 9;
+const int REAR_LEFT_IN1 = 10;
+const int REAR_LEFT_IN2 = 11;
+const int REAR_LEFT_EN = 12;
 
-// Include the library
-#include <L298N.h>
+struct rear_right_motor {
+  int in1 = REAR_RIGHT_IN1;
+  int in2 = REAR_RIGHT_IN2;
+  int en = REAR_RIGHT_EN;
+  int pwm_value = 0;
+};
+struct rear_left_motor {
+  int in1 = REAR_LEFT_IN1;
+  int in2 = REAR_LEFT_IN2;
+  int en = REAR_LEFT_EN;
+  int pwm_value = 0;
+};
 
-// Pin definition
-const signed int IN1 = 7;
-const signed int IN2 = 8;
-const signed int EN = 9;
+int input_from_fc [4];
 
-// Create one motor instance
-L298N rear_right_motor(EN, IN1, IN2);
-
-void setup()
-{
-  // Used to display information
-  Serial.begin(9600);
-
-  motor.setSpeed(70);
+void setup() {
 }
 
-void loop()
-{
-
-  // Tell the motor to go forward (may depend by your wiring)
-  motor.forward();
-
-  // Alternative method:
-  // motor.run(L298N::FORWARD);
-
-  //print the motor satus in the serial monitor
-  printSomeInfo();
-
-  delay(3000);
-
-  // Stop
-  motor.stop();
-
-  // Alternative method:
-  // motor.run(L298N::STOP);
-
-  printSomeInfo();
-
-  // Change speed
-  motor.setSpeed(255);
-
-  delay(3000);
-
-  // Tell the motor to go back (may depend by your wiring)
-  motor.backward();
-
-  // Alternative method:
-  // motor.run(L298N::BACKWARD);
-
-  printSomeInfo();
-
-  motor.setSpeed(120);
-
-  delay(3000);
-
-  // Stop
-  motor.stop();
-
-  printSomeInfo();
-
-  delay(3000);
-}
-
-/*
-Print some informations in Serial Monitor
-*/
-void printSomeInfo()
-{
-  Serial.print("Motor is moving = ");
-  Serial.print(motor.isMoving());
-  Serial.print(" at speed = ");
-  Serial.println(motor.getSpeed());
+void loop() {
+  readings();
+  motor_stop(&rear_right_motor);
+  motor_stop(&rear_left_motor);
 }
