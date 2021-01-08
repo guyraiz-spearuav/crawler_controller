@@ -22,3 +22,8 @@ void motor_move(MOTOR motor, int pwm_value, bool direction) {
   digitalWrite(motor.in2, !direction);
   analogWrite(motor.en, pwm_value);
 }
+void motor_stop(MOTOR motor) {
+  digitalWrite(motor.in1, true);
+  digitalWrite(motor.in2, true);
+  analogWrite(motor.en, 255);
+}

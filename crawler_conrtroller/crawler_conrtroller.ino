@@ -8,7 +8,9 @@ void motors_run(void);
 
 void motor_move(MOTOR, int, bool);
 int pwm_output (int);
-bool move_direction ( int);
+bool move_direction (int);
+void motor_stop(MOTOR);
+
 
 const int INPUT_PIN_FROM_FC [4] = {2, 3, 4, 5};
 const int REAR_RIGHT_IN1 = 6;
@@ -40,9 +42,25 @@ void setup() {
 }
 
 void loop() {
-  readings();
-  motors_run();
-  for (int i = 0; i <= 3; i++) {
+  //  readings();
+  //  motors_run();
+  for (int i = 150; i <= 255; i++) {
+    motor_move(motor_position[0], i, true);
+    motor_move(motor_position[1], i, true);
+    delay (25);
   }
-  Serial.println();
+  delay (1000);
+  motor_stop(motor_position[0]);
+  motor_stop(motor_position[1]);
+  delay (1000);
+  for (int i = 150; i <= 255; i++) {
+    motor_move(motor_position[0], i, false);
+    motor_move(motor_position[1], i, false);
+    delay (25);
+  }
+  delay(1000);
+  motor_stop(motor_position[0]);
+  motor_stop(motor_position[1]);
+  delay (1000);
+  Serial.println("guy");
 }
